@@ -1,8 +1,9 @@
 <template>
-  <div class="jumbotron">
-    <div class="container text-center">
-      <h1>Livres</h1>
-      <h3>Baixada Santista</h3>
+  <div class="row justify-content-center">
+    <div class="jumbotron col-5">
+      <div class="row col-10">
+        <img class="img-fluid" src="@/assets/logo_livres.png">
+      </div>
     </div>
   </div>
 </template>
