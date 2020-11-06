@@ -1,5 +1,9 @@
 <template>
   <div>
+    <img id="background" class="position-absolute h-100 w-100" 
+        style="z-index: -10; opacity: 50%; object-fit: cover" 
+        src="@/assets/background.jpg">
+
     <div v-if="estaLogado">
       <com-side-bar></com-side-bar>
       <com-menu></com-menu>
