@@ -1,45 +1,49 @@
 <template>
-  <div>
-    <h2>Pré-comunidades</h2>
+  <div class="card">
+    <div class="row justify-content-center">
+      <div class="col-11 my-3">
+        <h2>Pré-comunidades</h2>
 
-    <table class="container table">
-      <thead class="thead">
-        <tr>
-          <th scope="col">Name</th>
-        </tr>
-      </thead>
+        <table class="container table">
+          <thead class="thead">
+            <tr>
+              <th scope="col">Name</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <tr v-for="precomunidade in precomunidades" :key="precomunidade.id">
-          <td>{{ precomunidade.nome }}</td>
-          <td class="row justify-content-end">
-            <router-link
-              class="btn btn-outline-primary mr-3"
-              :to="{name: 'CadPreComunidade', params:{precomunidadeAlterar: precomunidade}}"
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </router-link>
-            <a
-              class="btn btn-outline-danger"
-              type="button"
-              data-toggle="modal"
-              data-target="#deletarModal"
-              @click="IdentificarId(precomunidade.id)"
-            >
-              <i class="fas fa-trash-alt"></i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <router-link class="btn btn-outline-primary mr-3" to="precomunidades/cadastro">
-      <i class="fas fa-plus"></i>
-    </router-link>
+          <tbody>
+            <tr v-for="precomunidade in precomunidades" :key="precomunidade.id">
+              <td>{{ precomunidade.nome }}</td>
+              <td class="row justify-content-end">
+                <router-link
+                  class="btn btn-outline-primary mr-3"
+                  :to="{name: 'CadPreComunidade', params:{precomunidadeAlterar: precomunidade}}"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                </router-link>
+                <a
+                  class="btn btn-outline-danger"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#deletarModal"
+                  @click="IdentificarId(precomunidade.id)"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <router-link class="btn btn-outline-primary mr-3" to="precomunidades/cadastro">
+          <i class="fas fa-plus"></i>
+        </router-link>
 
-    <com-modal-delete
-      mensagem="Deseja excluir esta pré-comunidade?"
-      v-on:confirmar="ExcluirPrecomunidade"
-    />
+        <com-modal-delete
+          mensagem="Deseja excluir esta pré-comunidade?"
+          v-on:confirmar="ExcluirPrecomunidade"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

@@ -1,51 +1,55 @@
 <template>
-  <div>
-    <h2>Consumidores</h2>
+  <div class="card">
+    <div class="row justify-content-center">
+      <div class="col-11 my-3">
+        <h2>Consumidores</h2>
 
-    <table class="container table">
-      <thead class="thead">
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Sobrenome</th>
-          <th scope="col">CPF</th>
-          <th scope="col">Pré-comunidade</th>
-        </tr>
-      </thead>
+        <table class="container table">
+          <thead class="thead">
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Pré-comunidade</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr v-for="consumidor in consumidores" :key="consumidor.cpf">
-          <td>{{ consumidor.nome }}</td>
-          <td>{{ consumidor.sobrenome }}</td>
-          <td>{{ consumidor.cpf }}</td>
-          <td>{{ consumidor.precomunidade }} - {{ consumidor.nomeprecomunidade }}</td>
-          <td class="row justify-content-end">
-            <router-link
-              class="btn btn-outline-primary mr-3"
-              :to="{name: 'CadConsumidores', params:{consumidorAlterar: consumidor}}"
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </router-link>
-            <a
-              class="btn btn-outline-danger"
-              type="button"
-              data-toggle="modal"
-              data-target="#deletarModal"
-              @click="IdentificarCpf(consumidor.cpf)"
-            >
-              <i class="fas fa-trash-alt"></i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <router-link class="btn btn-outline-primary mr-3" to="consumidores/cadastro">
-      <i class="fas fa-plus"></i>
-    </router-link>
+        <tbody>
+          <tr v-for="consumidor in consumidores" :key="consumidor.cpf">
+            <td>{{ consumidor.nome }}</td>
+            <td>{{ consumidor.sobrenome }}</td>
+            <td>{{ consumidor.cpf }}</td>
+            <td>{{ consumidor.precomunidade }} - {{ consumidor.nomeprecomunidade }}</td>
+            <td class="row justify-content-end">
+              <router-link
+                class="btn btn-outline-primary mr-3"
+                :to="{name: 'CadConsumidores', params:{consumidorAlterar: consumidor}}"
+              >
+                <i class="fas fa-pencil-alt"></i>
+              </router-link>
+              <a
+                class="btn btn-outline-danger"
+                type="button"
+                data-toggle="modal"
+                data-target="#deletarModal"
+                @click="IdentificarCpf(consumidor.cpf)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <router-link class="btn btn-outline-primary mr-3" to="consumidores/cadastro">
+          <i class="fas fa-plus"></i>
+        </router-link>
 
-    <com-modal-delete
-      mensagem="Deseja excluir este consumidor?"
-      v-on:confirmar="ExcluirConsumidor"
-    />
+        <com-modal-delete
+          mensagem="Deseja excluir este consumidor?"
+          v-on:confirmar="ExcluirConsumidor"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

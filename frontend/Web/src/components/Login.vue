@@ -11,7 +11,7 @@
                 type="text"
                 name="username"
                 id="username"
-                class="form-control"
+                class="form-control mb-3"
                 placeholder="Usuário"
                 v-model="username"
               />
