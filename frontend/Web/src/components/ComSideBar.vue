@@ -2,7 +2,7 @@
   <nav class="main-navbar navbar fixed-top navbar-expand-lg navbar-light bg-white">
     <router-link class="navbar-brand" to="/">
       <img
-        src="https://i.pinimg.com/originals/c7/65/3f/c7653f9e8d1d0e13212970213ebc76f6.png"
+        src="@/assets/pomba.png"
         width="30"
         height="30"
         class="d-inline-block align-top"
