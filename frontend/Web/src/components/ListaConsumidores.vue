@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     ListarConsumidores: function() {
+      this.consumidores = [];
       Consumidores.listar()
         .then(result => {
           result.data.forEach(data => {
