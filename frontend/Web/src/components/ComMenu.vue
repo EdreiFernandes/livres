@@ -2,7 +2,7 @@
   <nav class="main-menu">
     <ul>
       <li v-for="item in items" :key="item.id">
-        <router-link v-bind:to="item.href">
+        <router-link :id="item.name" :name="item.name" v-bind:to="item.href">
           <i v-bind:class="item.icon"></i>
           <span class="nav-text">{{ item.name }}</span>
         </router-link>
