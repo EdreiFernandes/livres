@@ -112,6 +112,12 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<!-- starter-mail -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
