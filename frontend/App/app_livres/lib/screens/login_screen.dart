@@ -71,7 +71,6 @@ class Login extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                           onPressed: () {
-                            //navigateToSubPage(context);
                             Navigator.of(context).push(_createRoute());
                           },
                           color: Color.fromARGB(255, 41, 171, 226),
