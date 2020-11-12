@@ -71,14 +71,13 @@ class _HomeMenu extends State<HomeMenu> {
                             color: Colors.white,
                             iconSize: 25,
                             onPressed: () {
-                              Navigator.of(context).push(_createRoute(PreComunidade()));
+                              Navigator.of(context).push(_createRoute(PreComunidadeScreen()));
                             },
                           ),
                           Container(
                             child: Text(
                               "Pré-Comunidades",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -94,8 +93,7 @@ class _HomeMenu extends State<HomeMenu> {
                           Container(
                             child: Text(
                               "Usuários",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -111,8 +109,7 @@ class _HomeMenu extends State<HomeMenu> {
                           Container(
                             child: Text(
                               "Produtores",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -128,8 +125,7 @@ class _HomeMenu extends State<HomeMenu> {
                           Container(
                             child: Text(
                               "Produtos",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -137,9 +133,7 @@ class _HomeMenu extends State<HomeMenu> {
                     ],
                   ),
                   height: 80,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 41, 171, 226),
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: Color.fromARGB(255, 41, 171, 226), borderRadius: BorderRadius.circular(10)),
                 )),
           )
         ],
