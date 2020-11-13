@@ -2,6 +2,7 @@ package br.com.livresbs.livres.filters;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -56,4 +57,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		response.addHeader("Authentication", "Bearer " + token);
 		response.addHeader("access-control-expose-headers","Authorization");
 		}
+	@Override
+	protected void unsuccessfulAuthentication(javax.servlet.http.HttpServletRequest request,
+			javax.servlet.http.HttpServletResponse response, AuthenticationException failed)
+			throws java.io.IOException, javax.servlet.ServletException {
+		response.setStatus(401);
+		response.setContentType("application/json");
+		response.getWriter().append(json());
+	}
+
+	private String json() {
+		long date = new Date().getTime();
+		return "{\"timestamp\": " + date + ", " 
+				+ "\"status\": 401, " + "\"error\": \"Não autorizado\", "
+				+ "\"message\": \"Email ou senha inválidos\", " 
+				+ "\"path\": \"/login\"}";
+	}
 }
