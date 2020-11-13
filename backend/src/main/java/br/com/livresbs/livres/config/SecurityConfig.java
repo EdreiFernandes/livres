@@ -16,6 +16,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import br.com.livresbs.livres.filters.JWTAuthenticationFilter;
+import br.com.livresbs.livres.filters.JWTAuthorizationFilter;
+import br.com.livresbs.livres.utils.JWTUtil;
+
 
 @Configuration
 @EnableWebSecurity

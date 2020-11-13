@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.livresbs.livres.dto.ConsumidorDTO;
-import br.com.livresbs.livres.model.Consumidor;
 import br.com.livresbs.livres.model.EnderecoEntrega;
 import br.com.livresbs.livres.service.EnderecoService;
 @SuppressWarnings("rawtypes")
