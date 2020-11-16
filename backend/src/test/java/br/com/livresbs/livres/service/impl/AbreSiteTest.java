@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class AbreSiteTest {
 	
@@ -73,6 +74,13 @@ public class AbreSiteTest {
 		
 		WebElement senha2 = driver.findElement(By.xpath("//*[@id='senha']"));
 		senha2.sendKeys("1234");
+		
+	    WebElement testDropDown = driver.findElement(By.id("selectComunidade"));  
+	    Select dropdown = new Select(testDropDown);  
+	    
+	    dropdown.selectByIndex(1);
+	    
+	    driver.findElement(By.xpath("//*[@id='cadastraConsumidor']")).click();
 		
 	}
 
