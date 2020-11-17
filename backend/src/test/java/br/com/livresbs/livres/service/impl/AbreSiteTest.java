@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
 public class AbreSiteTest {
@@ -20,22 +21,84 @@ public class AbreSiteTest {
 
 	@Before
 	public void setUp() throws Exception {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("start-maximized");
 		System.setProperty("webdriver.chrome.driver", "D:\\Unisantos\\Nova pasta\\chromedriver.exe");
-		driver = new ChromeDriver();
-			
+		driver = new ChromeDriver(options);
+
+		
+		driver.get("http://localhost:4242/");
+		
+		Thread.sleep(2000);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		Thread.sleep(2000);
+		driver.close();
+	}
+	
+	@Test
+	public final void TesteCadastraUsuario() throws InterruptedException, AWTException {
+
+		
+		WebElement username =   driver.findElement(By.xpath("//*[@id='username']"));
+		username.sendKeys("grzegorzrudniak@gmail.com");
+		
+		WebElement senha =   driver.findElement(By.xpath("//*[@id='senha']"));
+		senha.sendKeys("grzegorzrudniak@gmail.com");
+		Thread.sleep(2000);
+		
+		WebElement botaoLogin =   driver.findElement(By.xpath("//*[@id='login']"));
+		botaoLogin.click(); 
+		
+		Thread.sleep(1000);
+		
+		WebElement botaoConsumidores =   driver.findElement(By.xpath("//*[@id='Consumidores']"));
+		botaoConsumidores.click(); 
+		
+		Thread.sleep(1000);
+		
+		Robot robot = new Robot();
+		robot.mouseMove(600,600);
+		
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='linkCadastroConsumidor']")).click();
+		
+		Thread.sleep(1000);
+		
+		WebElement nome = driver.findElement(By.xpath("//*[@id='nome']"));
+		nome.sendKeys("Thiago");
+		
+		WebElement sobrenome = driver.findElement(By.xpath("//*[@id='sobrenome']"));
+		sobrenome.sendKeys("Ferauche");
+		
+		WebElement cpf = driver.findElement(By.xpath("//*[@id='cpf']"));
+		cpf.sendKeys("12365478976");
+		
+		WebElement senha2 = driver.findElement(By.xpath("//*[@id='senha']"));
+		senha2.sendKeys("1234");
+		
+	    WebElement testDropDown = driver.findElement(By.id("selectComunidade"));  
+	    Select dropdown = new Select(testDropDown);  
+	    
+	    dropdown.selectByIndex(1);
+	    
+	    driver.findElement(By.xpath("//*[@id='cadastraConsumidor']")).click();
+	    
+	    Thread.sleep(2000);
+	    
+	    WebElement textDemo = driver.findElement(By.xpath("//*[text()='12365478976']"));
+	    
+	    assertEquals("12365478976", textDemo.getText());
+	 
+	 
 		
 	}
 
 	@Test
-	public final void test() throws InterruptedException, AWTException {
-		driver.get("http://localhost:4242/");
-		assertEquals("Livres", driver.getTitle());
-		
-		Thread.sleep(2000);
+	public final void testeCadastraUsuarioRepetido() throws InterruptedException, AWTException {
 		
 		WebElement username =   driver.findElement(By.xpath("//*[@id='username']"));
 		username.sendKeys("grzegorzrudniak@gmail.com");
@@ -64,13 +127,13 @@ public class AbreSiteTest {
 		Thread.sleep(1000);
 		
 		WebElement nome = driver.findElement(By.xpath("//*[@id='nome']"));
-		nome.sendKeys("Thiago");
+		nome.sendKeys("Gabriel");
 		
 		WebElement sobrenome = driver.findElement(By.xpath("//*[@id='sobrenome']"));
-		sobrenome.sendKeys("Ferauche");
+		sobrenome.sendKeys("Jardim");
 		
 		WebElement cpf = driver.findElement(By.xpath("//*[@id='cpf']"));
-		cpf.sendKeys("12365478976");
+		cpf.sendKeys("123451231231");
 		
 		WebElement senha2 = driver.findElement(By.xpath("//*[@id='senha']"));
 		senha2.sendKeys("1234");
@@ -81,7 +144,10 @@ public class AbreSiteTest {
 	    dropdown.selectByIndex(1);
 	    
 	    driver.findElement(By.xpath("//*[@id='cadastraConsumidor']")).click();
-		
+	    
+	    assertEquals("http://localhost:4242/consumidores/cadastro", driver.getCurrentUrl());
 	}
+	
+	
 
 }
