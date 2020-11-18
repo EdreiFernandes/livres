@@ -1,63 +1,50 @@
 # API LIVRES BAIXADA SANTISTA
 
-## OBJETIVO
+## Testes feitos pelo Grupo L1
+Dentro da pasta de testes do projeto, temos o pacote "br.com.livresbs.livres.model", o qual encontra-se a classe ConsumidorTest.
 
-Criar métodos de cadastro e consulta através de requisições HTTP utilizando-se de Spring Boot e JPA.
+Estamos utilizando JUnit e efetuando todos os testes unitários de todos os Gets da Classe de Consumidor.
 
-## CAMINHOS
+```
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
-### GET
+class ConsumidorTest {
 
-- api/consumidor
+	@Test
+	final void testGetCpf() {
+		Consumidor c1 = new Consumidor();
+		c1.setCpf("12345678912");
+		assertEquals("12345678912", c1.getCpf());
+	}
 
-  - retorna todos os comsumidores cadastrados.
+	@Test
+	final void testGetNome() {
+		Consumidor c1 = new Consumidor();
+		c1.setNome("gabriel");
+		assertEquals("gabriel", c1.getNome());
+	}
 
-- api/consumidor/_cpf_
+	@Test
+	final void testGetSobrenome() {
+		Consumidor c1 = new Consumidor();
+		c1.setSobrenome("Tavares");
+		assertEquals("Tavares", c1.getSobrenome());
+	}
 
-  - retorna o consumidor com o CPF especificado.
+	@Test
+	final void testGetSenha() {
+		Consumidor c1 = new Consumidor();
+		c1.setSenha("Ciro");
+		assertEquals("Ciro", c1.getSenha());
+	}
 
-- api/precomunidade
-
-  - retornar todas as pré-comunidade cadastradas.
-
-- api/precomunidade/_id_
-
-  - retornar a pré-comunidade com o id especificado.
-
-- produtos/categorias
-
-  - retornar todas as categorias de produto cadastradas.
-
-### POST
-
-- api/precomunidade
-
-  - adiciona uma pré-comunidade;
-
-  - parametros do body:
-
-    - _nome - string_.
-
-- api/consumidor
-
-  - adiciona um consumidor;
-
-  - parametros do body:
-
-    - _cpf - string_;
-    - _nome - string_;
-    - _sobrenome - string_;
-    - _senha - string_;
-    - _precomunidade - long_;
-
-  - _precomunidade tem que existir no banco_.
-
-### PUT
-
-- AQUI
-
-### DELETE
-
-- api/consumidor/_cpf_
-
-  - Remove o registro do comsumidor especificado.
+	@Test
+	final void testGetPrecomunidade() {
+		Consumidor c = new Consumidor();
+		PreComunidade p = new PreComunidade();
+		c.setPrecomunidade(p);
+		assertEquals(p, c.getPrecomunidade());
+	}
+}
+```
