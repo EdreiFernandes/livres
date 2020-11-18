@@ -17,13 +17,15 @@ import org.openqa.selenium.support.ui.Select;
 
 public class AbreSiteTest {
 	
+	//usar base de teste
+	
 	private WebDriver driver;
 
 	@Before
 	public void setUp() throws Exception {
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("start-maximized");
-		System.setProperty("webdriver.chrome.driver", "D:\\Unisantos\\Nova pasta\\chromedriver.exe");
+		options.addArguments("start-maximized"); //  fazer teste "headerless"
+		System.setProperty("webdriver.chrome.driver", "D:\\Unisantos\\Nova pasta\\chromedriver.exe");//mudar caminho absoluto
 		driver = new ChromeDriver(options);
 
 		
@@ -89,9 +91,7 @@ public class AbreSiteTest {
 	    
 	    Thread.sleep(2000);
 	    
-	    WebElement textDemo = driver.findElement(By.xpath("//*[text()='12365478976']"));
-	    
-	    assertEquals("12365478976", textDemo.getText());
+	
 	 
 	 
 		
