@@ -61,7 +61,7 @@
             <div class="pt-1"></div>
 
             <div class="select">
-              <select class="select-text" required v-model="consumidor.precomunidade">
+              <select class="select-text" required v-model="consumidor.precomunidade" id="selectComunidade">
                 <option disabled selected></option>
                 <option
                   v-for="option in precomunidades"
@@ -79,7 +79,7 @@
             <div class="row">
               <div class="col text-right">
                 <router-link to="/consumidores" type="button" class="btn">Cancelar</router-link>
-                <button type="button" class="btn btn-primary pull-right" @click="cadastrar()">
+                <button type="button" class="btn btn-primary pull-right" @click="cadastrar()" id="cadastraConsumidor">
                   <i class="fa fa-floppy-o"></i> Cadastrar
                 </button>
               </div>
