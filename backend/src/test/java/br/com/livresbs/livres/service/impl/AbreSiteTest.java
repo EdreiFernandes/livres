@@ -20,7 +20,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
 public class AbreSiteTest {
-	
+
 	
 	@Rule
 	public TestName name = new TestName();
@@ -39,13 +39,14 @@ public class AbreSiteTest {
 
 	@After
 	public void tearDown() throws Exception {
-		
-		if(name.getMethodName().equals("TesteCadastraUsuario")) {
+		if (name.getMethodName().equals("TesteCadastraUsuario")) {
 			URL url = new URL("http://livresbs.herokuapp.com/api/consumidor/12365478976");
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-			con.connect();
+			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+			httpCon.setRequestMethod("DELETE");
+			int responseCode = httpCon.getResponseCode();
+			System.out.println("delete request code: " + responseCode);
 		}
-		
+
 		Thread.sleep(2000);
 		driver.close();
 	}
@@ -104,8 +105,8 @@ public class AbreSiteTest {
 
 	@Test
 	public final void testeCadastraUsuarioRepetido() throws InterruptedException, AWTException {
-		
 
+		
 		WebElement username = driver.findElement(By.xpath("//*[@id='username']"));
 		username.sendKeys("grzegorzrudniak@gmail.com");
 
