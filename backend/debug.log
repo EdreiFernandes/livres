@@ -1,2 +1,3 @@
 [1112/214611.299:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
 [1116/222000.735:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[1118/213915.407:ERROR:crashpad_client_win.cc(521)] CreateProcess: Acesso negado. (0x5)
