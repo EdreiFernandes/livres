@@ -30,7 +30,7 @@ public class AbreSiteTest {
 	@Before
 	public void setUp() throws Exception {
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("start-maximized"); // fazer teste "headerless"
+		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
 		System.setProperty("webdriver.chrome.driver", "D:\\Unisantos\\Nova pasta\\chromedriver.exe");// mudar caminho // absoluto
 		driver = new ChromeDriver(options);
 		driver.get("http://localhost:4242/");
