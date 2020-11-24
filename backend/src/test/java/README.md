@@ -1,9 +1,18 @@
 # API LIVRES BAIXADA SANTISTA
 
 ## Testes feitos pelo Grupo L1
-Dentro da pasta de testes do projeto, temos o pacote "br.com.livresbs.livres.model", o qual encontra-se a classe ConsumidorTest.
+## Testes unitários
 
-Estamos utilizando JUnit e efetuando todos os testes unitários de todos os Gets da Classe de Consumidor.
+Dentro da pasta de testes do projeto, temos o pacote "br.com.livresbs.livres.model", o qual encontra-se a classe ConsumidorTest.
+Nesta classe executamos os testes da classe Consumidor. 
+Devido ao projeto ser uma API com métodos que fazem acesso ao banco de dados, e possuem interação com demais métodos da aplicação, optamos por realizar
+os testes dos métodos getters da classe Consumidor, utilizando JUnit integrado ao pacote do Spring Boot.
+
+Os testes consistem em:
+	1 - criar um consumidor;
+	2 - definir o atributo que iremos testar;
+	3 - verificar se o valor retornado é igual ao definido na etapa 2.
+
 
 ```
 import static org.junit.jupiter.api.Assertions.assertEquals;
