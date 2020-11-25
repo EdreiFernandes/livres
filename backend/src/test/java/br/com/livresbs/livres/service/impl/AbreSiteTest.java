@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Value;
 
 public class AbreSiteTest {
 
@@ -26,12 +27,14 @@ public class AbreSiteTest {
 	public TestName name = new TestName();
 
 	private WebDriver driver;
+	
+	@Value("${path.chrome}") private String pathChrome;
 
 	@Before
 	public void setUp() throws Exception {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
-		System.setProperty("webdriver.chrome.driver", "D:\\Unisantos\\Nova pasta\\chromedriver.exe");// mudar caminho // absoluto
+		System.setProperty("webdriver.chrome.driver", pathChrome);
 		driver = new ChromeDriver(options);
 		driver.get("http://localhost:4242/");
 		Thread.sleep(2000);
