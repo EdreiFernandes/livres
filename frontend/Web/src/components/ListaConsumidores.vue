@@ -40,7 +40,7 @@
           </tr>
         </tbody>
         </table>
-        <router-link class="btn btn-outline-primary mr-3" to="consumidores/cadastro">
+        <router-link class="btn btn-outline-primary mr-3" to="consumidores/cadastro" id="linkCadastroConsumidor">
           <i class="fas fa-plus"></i>
         </router-link>
 

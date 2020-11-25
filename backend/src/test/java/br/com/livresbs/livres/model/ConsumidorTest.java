@@ -41,10 +41,4 @@ class ConsumidorTest {
 		c.setPrecomunidade(p);
 		assertEquals(p, c.getPrecomunidade());
 	}
-
-	@Test
-	final void testGetEnderecos() {
-		
-		
-	}
 }
