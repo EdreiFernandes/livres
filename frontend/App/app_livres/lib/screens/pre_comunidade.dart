@@ -8,11 +8,17 @@ class PreComunidadeScreen extends StatefulWidget {
   _PreComunidadeScreen createState() => _PreComunidadeScreen();
 }
 
-Future<List<PreComunidade>> precomunidades = PreComunidadeAPI.getPrecomunidades();
+Future<List<PreComunidade>> precomunidadesAll;
 
 final nomePreComunidade = TextEditingController();
 
 class _PreComunidadeScreen extends State<PreComunidadeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    precomunidadesAll = PreComunidadeAPI.getPrecomunidades();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +27,25 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
         backgroundColor: Color.fromARGB(255, 41, 171, 226),
         centerTitle: true,
       ),
-      body: _body(precomunidades),
+      body: FutureBuilder(
+        future: precomunidadesAll,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text("Erro ao Acessar os Dados");
+          }
+
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          List<PreComunidade> precomunidades = snapshot.data;
+          print(precomunidades[0].nome);
+          return _conteudoBody(precomunidades);
+        },
+      ),
       floatingActionButton: FloatingActionButton(
+        key: Key('floating'),
         onPressed: addPrecomunidade,
         child: Icon(Icons.add),
         backgroundColor: Color.fromARGB(255, 41, 171, 226),
@@ -30,29 +53,7 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
     );
   }
 
-  _body(precomunidades) {
-    return FutureBuilder(
-      future: precomunidades,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text("Erro ao Acessar os Dados");
-        }
-
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 10,
-            ),
-          );
-        }
-        List<PreComunidade> precomunidades = snapshot.data;
-        print(precomunidades[0].nome);
-        return _conteudoBody(precomunidades);
-      },
-    );
-  }
-
-  _conteudoBody(precomunidades) {
+  Widget _conteudoBody(precomunidades) {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -78,7 +79,24 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
                   IconButton(
                     icon: Icon(Icons.delete),
                     color: Colors.red,
-                    onPressed: () {},
+                    onPressed: () async {
+                      bool fez = await PreComunidadeAPI.deletePrecomunidade(precomunidades[index].id);
+
+                      if (fez) {
+                        log("entrou no coiso");
+                        final snack = SnackBar(content: Text("Pré-Comunidade ${precomunidades[index].nome} Excluída com Sucesso!"));
+
+                        setState(() {
+                          precomunidades = PreComunidadeAPI.getPrecomunidades();
+                        });
+
+                        Scaffold.of(context).showSnackBar(snack);
+                      } else {
+                        setState(() {
+                          SnackBar(content: Text("Erro ao Excluir a Pré-Comunidade ${precomunidades[index].nome}"));
+                        });
+                      }
+                    },
                   ),
                 ],
               ),
@@ -109,6 +127,7 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
                   child: TextField(
+                    key: Key('txt_add'),
                     decoration: InputDecoration(
                       hintText: "Nome da Pré-Comunidade",
                       border: InputBorder.none,
@@ -130,10 +149,15 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         log(nomePreComunidade.text);
-                        PreComunidadeAPI.postPrecomunidade(nomePreComunidade.text);
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PreComunidadeScreen()));
+                        Navigator.of(context).pop(true);
+                        await PreComunidadeAPI.postPrecomunidade(nomePreComunidade.text);
+                        precomunidades = PreComunidadeAPI.getPrecomunidades();
+
+                        setState(() {
+                          precomunidades = PreComunidadeAPI.getPrecomunidades();
+                        });
                       },
                     ),
                   ),
@@ -146,74 +170,3 @@ class _PreComunidadeScreen extends State<PreComunidadeScreen> {
     );
   }
 }
-
-/*
-  Widget listPreComunidade(nomePreComunidade) {
-  return ListTile(
-      leading: CircleAvatar(
-        child: Icon(Icons.group),
-        backgroundColor: Color.fromARGB(255, 41, 171, 226),
-        foregroundColor: Colors.white,
-      ),
-      title: Text(nomePreComunidade),
-      trailing: Container(
-        width: 100,
-        child: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.edit),
-              color: Colors.orange,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.delete),
-              color: Colors.red,
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-      onTap: () {},
-    );*/
-
-/*class PreComunidadeList extends StatelessWidget {
-   _retorno(precomunidades);
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: CircleAvatar(
-              child: Icon(Icons.group),
-              backgroundColor: Color.fromARGB(255, 41, 171, 226),
-              foregroundColor: Colors.white,
-            ),
-            title: Text('Pré-Comunidade ' + (index + 1).toString()),
-            trailing: Container(
-              width: 100,
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    color: Colors.orange,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    color: Colors.red,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-            onTap: () {},
-          ),
-        );
-      },
-    );
-  }
-}*/

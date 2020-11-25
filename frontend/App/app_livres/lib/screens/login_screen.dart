@@ -1,5 +1,7 @@
 import 'package:app_livres/screens/home_menu.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -38,6 +40,11 @@ class Login extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 25.0, right: 25.0, left: 25.0),
                     child: TextField(
+                      key: Key('cpf'),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter(),
+                      ],
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
@@ -51,6 +58,7 @@ class Login extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, right: 25.0, left: 25.0),
                     child: TextField(
+                      key: Key('senha'),
                       obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(

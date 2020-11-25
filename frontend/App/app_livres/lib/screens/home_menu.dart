@@ -1,3 +1,4 @@
+import 'package:app_livres/screens/consumidores.dart';
 import 'package:app_livres/screens/pre_comunidade.dart';
 import 'package:flutter/material.dart';
 
@@ -67,6 +68,7 @@ class _HomeMenu extends State<HomeMenu> {
                       Column(
                         children: [
                           IconButton(
+                            key: Key('PreScreen'),
                             icon: Icon(Icons.group),
                             color: Colors.white,
                             iconSize: 25,
@@ -88,11 +90,13 @@ class _HomeMenu extends State<HomeMenu> {
                             icon: Icon(Icons.person),
                             color: Colors.white,
                             iconSize: 25,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(_createRoute(ConsumidoresScreen()));
+                            },
                           ),
                           Container(
                             child: Text(
-                              "Usuários",
+                              "Consumidores",
                               style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           )
@@ -133,7 +137,7 @@ class _HomeMenu extends State<HomeMenu> {
                     ],
                   ),
                   height: 80,
-                  decoration: BoxDecoration(color: Color.fromARGB(255, 41, 171, 226), borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: Color.fromARGB(255, 41, 171, 226), borderRadius: BorderRadius.circular(0)),
                 )),
           )
         ],

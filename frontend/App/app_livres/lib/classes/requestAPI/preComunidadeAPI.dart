@@ -58,4 +58,25 @@ class PreComunidadeAPI {
 
     return precomunidade;
   }
+
+  static Future<bool> deletePrecomunidade(id) async {
+    var url = "http://livresbs.herokuapp.com/api/precomunidade/$id";
+
+    var header = {"Content-Type": "application/json"};
+
+    log(url);
+    var response = await http.delete(url, headers: header);
+
+    print('Response Status Post: ${response.statusCode}');
+
+    bool deletou;
+    if (response.statusCode == 200) {
+      log("FEZ O DELETE");
+      deletou = true;
+    } else {
+      deletou = false;
+    }
+
+    return deletou;
+  }
 }
