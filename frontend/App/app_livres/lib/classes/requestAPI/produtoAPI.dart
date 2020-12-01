@@ -10,7 +10,7 @@ class ProdutoAPI {
 
     var url = "http://livresbs.ga/api/loja/produtos";
 
-    var header = {"Content-Type": "application/json", "cpf": "400.500.900-24"};
+    var header = {"Content-Type": "application/json", "cpf": "191"};
 
     var response = await http.get(url, headers: header);
 
