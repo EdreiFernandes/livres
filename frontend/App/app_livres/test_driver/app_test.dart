@@ -18,9 +18,9 @@ void main() {
 
     var button = find.text("Acessar");
 
-    var text = find.text("Seja Bem-Vindo ");
+    var text = find.text("k");
 
-    test('Login', () async {
+    test('Efetuar Login', () async {
       await driver.tap(textCpf);
       await Future.delayed(Duration(seconds: 1));
       await driver.enterText("12345678910");
@@ -51,6 +51,7 @@ void main() {
       await driver.tap(buttonAddPre);
       await Future.delayed(Duration(seconds: 10));
       await driver.waitUntilNoTransientCallbacks();
+      await driver.waitFor(res);
       assert(res != null);
     });
   });

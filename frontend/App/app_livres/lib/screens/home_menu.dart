@@ -1,5 +1,8 @@
+import 'package:app_livres/classes/destination.dart';
 import 'package:app_livres/screens/consumidores.dart';
+import 'package:app_livres/screens/home.dart';
 import 'package:app_livres/screens/pre_comunidade.dart';
+import 'package:app_livres/screens/produtos.dart';
 import 'package:flutter/material.dart';
 
 class HomeMenu extends StatefulWidget {
@@ -9,170 +12,85 @@ class HomeMenu extends StatefulWidget {
 class _HomeMenu extends State<HomeMenu> {
   int _currentIndex = 0;
 
+  final _homeMenuScreen = GlobalKey<NavigatorState>();
+  final _precomunidadeScreen = GlobalKey<NavigatorState>();
+  final _consumidorScreen = GlobalKey<NavigatorState>();
+  final _produtoScreen = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              height: 125,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Seja Bem-Vindo ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
-                    ),
-                    Text(
-                      " Usuário",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      "!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
-                    ),
-                  ],
-                ),
-              ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: <Widget>[
+          Navigator(
+            key: _homeMenuScreen,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => HomeScreen(),
             ),
           ),
-          Expanded(
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          IconButton(
-                            key: Key('PreScreen'),
-                            icon: Icon(Icons.group),
-                            color: Colors.white,
-                            iconSize: 25,
-                            onPressed: () {
-                              Navigator.of(context).push(_createRoute(PreComunidadeScreen()));
-                            },
-                          ),
-                          Container(
-                            child: Text(
-                              "Pré-Comunidades",
-                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.person),
-                            color: Colors.white,
-                            iconSize: 25,
-                            onPressed: () {
-                              Navigator.of(context).push(_createRoute(ConsumidoresScreen()));
-                            },
-                          ),
-                          Container(
-                            child: Text(
-                              "Consumidores",
-                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.person),
-                            color: Colors.white,
-                            iconSize: 25,
-                            onPressed: () {},
-                          ),
-                          Container(
-                            child: Text(
-                              "Produtores",
-                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.fastfood),
-                            color: Colors.white,
-                            iconSize: 25,
-                            onPressed: () {},
-                          ),
-                          Container(
-                            child: Text(
-                              "Produtos",
-                              style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  height: 80,
-                  decoration: BoxDecoration(color: Color.fromARGB(255, 41, 171, 226), borderRadius: BorderRadius.circular(0)),
-                )),
-          )
+          Navigator(
+            key: _precomunidadeScreen,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => PreComunidadeScreen(),
+            ),
+          ),
+          Navigator(
+            key: _consumidorScreen,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => ConsumidoresScreen(),
+            ),
+          ),
+          Navigator(
+            key: _produtoScreen,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => ProdutoScreen(),
+            ),
+          ),
         ],
       ),
-      /*bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: "Pré-Comunidades",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Consumidores",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.food_bank),
-            label: "Produtores",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood),
-            label: "Produtos",
-          ),
-        ],
-        backgroundColor: Color.fromARGB(255, 41, 171, 226),
-        fixedColor: Colors.white,
-        unselectedItemColor: Colors.white,
-      ),*/
+        onTap: (val) => _onTap(val, context),
+        items: allDestinations.map((Destination destination) {
+          return BottomNavigationBarItem(
+            icon: Icon(destination.icon),
+            backgroundColor: destination.color,
+            label: destination.title,
+          );
+        }).toList(),
+      ),
     );
+  }
+
+  void _onTap(int val, BuildContext context) {
+    if (_currentIndex == val) {
+      switch (val) {
+        case 0:
+          _homeMenuScreen.currentState.popUntil((route) => route.isFirst);
+          break;
+        case 1:
+          _precomunidadeScreen.currentState.popUntil((route) => route.isFirst);
+          break;
+        case 2:
+          _consumidorScreen.currentState.popUntil((route) => route.isFirst);
+          break;
+        case 3:
+          _produtoScreen.currentState.popUntil((route) => route.isFirst);
+          break;
+        default:
+      }
+    } else {
+      if (mounted) {
+        setState(() {
+          _currentIndex = val;
+        });
+      }
+    }
   }
 }
 
